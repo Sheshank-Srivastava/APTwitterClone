@@ -1,5 +1,6 @@
 package com.monnfamily.aptwitterclone.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -39,11 +40,15 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btn_Login:
                 String email =  etEmail.getText().toString().trim();
                 String pass =  etPassword.getText().toString().trim();
-
+                final ProgressDialog progressDialog =  new ProgressDialog(LogInActivity.this);
+                progressDialog.setMessage("Logging In");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
                 ParseUser.logInInBackground(email, pass, new LogInCallback() {
                     @Override
                     public void done(ParseUser user, ParseException e) {
-                            if (user== null || e!=null){
+                        progressDialog.dismiss();
+                        if (user== null || e!=null){
                                 Toast.makeText(LogInActivity.this, "Email or Password  is required", Toast.LENGTH_SHORT).show();
                                 return;
                             }
