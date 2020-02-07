@@ -1,20 +1,24 @@
 package com.monnfamily.aptwitterclone.adapter;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.monnfamily.aptwitterclone.R;
+
+import java.util.List;
 
 public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserListItem> {
-    Context context;
-    ArrayList<String> userList;
-    ClickListener clickListener;
+    private Context context;
+    private List<String> userList;
+    private ClickListener clickListener;
 
-    public UserListAdapter(Context context, ArrayList<String> userList, ClickListener clickListener) {
+    public UserListAdapter(Context context, List<String> userList, ClickListener clickListener) {
         this.context = context;
         this.userList = userList;
         this.clickListener = clickListener;
@@ -23,23 +27,33 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserLi
     @NonNull
     @Override
     public UserListItem onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        return null;
+        View view = LayoutInflater.from(context).inflate(R.layout.user_list_item,parent,false);
+        UserListItem userListItem = new UserListItem(view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickListener.onClickItem(v);
+            }
+        });
+        return userListItem;
     }
 
     @Override
     public void onBindViewHolder(@NonNull UserListItem holder, int position) {
+        holder.txt_UserName.setText(userList.get(position));
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return userList.size();
     }
 
     public class UserListItem extends RecyclerView.ViewHolder{
+        TextView txt_UserName;
         public UserListItem(@NonNull View itemView) {
             super(itemView);
+            txt_UserName = itemView.findViewById(R.id.txt_UserName);
         }
     }
     public interface ClickListener{

@@ -10,4 +10,5 @@
     <string name="log_in">Login</string>
     <string name="signup">SignUp</string>
     <string name="logout">logout</string>
+    <string name="temp_username">test1</string>
 </resources>
