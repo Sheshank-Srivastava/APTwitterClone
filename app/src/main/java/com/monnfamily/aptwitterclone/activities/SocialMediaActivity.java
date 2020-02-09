@@ -34,15 +34,7 @@ public class SocialMediaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social_media);
-//        username.add("Sheshank");
-//        username.add("Tanya");
-//        username.add("seema");
-//        username.add("Kishor");
-//        username.add("piyush");
-//        username.add("tushar");
-//        username.add("Sheshank");
-//        username.add("Sheshank");
-//        username.add("Sheshank");
+
         mUserList = new ArrayList<>();
         parseQuery = ParseUser.getQuery();
         parseQuery.whereNotEqualTo("username", ParseUser.getCurrentUser().getUsername());
@@ -68,7 +60,7 @@ public class SocialMediaActivity extends AppCompatActivity {
         adapter = new UserListAdapter(SocialMediaActivity.this, mUserList, new UserListAdapter.ClickListener() {
             @Override
             public void onClickItem(View v) {
-                Toast.makeText(SocialMediaActivity.this, "Hello", Toast.LENGTH_SHORT).show();
+                //TODO click event
             }
         });
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
