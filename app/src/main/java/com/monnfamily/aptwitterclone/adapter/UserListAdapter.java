@@ -29,19 +29,19 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserLi
     public UserListItem onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.user_list_item,parent,false);
         UserListItem userListItem = new UserListItem(view);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickListener.onClickItem(v);
-            }
-        });
         return userListItem;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UserListItem holder, int position) {
+    public void onBindViewHolder(@NonNull final UserListItem holder, int position) {
         holder.txt_UserName.setText(userList.get(position));
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickListener.onClickItem(v,holder.getAdapterPosition());
+            }
+        });
     }
 
     @Override
@@ -57,6 +57,6 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserLi
         }
     }
     public interface ClickListener{
-        void onClickItem(View v);
+        void onClickItem(View v,int position);
     }
 }
