@@ -5,6 +5,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -49,7 +50,7 @@ public class Utilities {
     }
 
     /**
-     *  The Parse user with it's current data set will be uploaded to the server
+     * The Parse user with it's current data set will be uploaded to the server
      */
     private void savBackToBack4App() {
         final ProgressDialog dialog = new ProgressDialog(context);
@@ -67,4 +68,22 @@ public class Utilities {
         });
     }
 
+    public void sendTweet(final String tweet, final Context context) {
+        final ParseObject parseObject = new ParseObject("MyTweet");
+        parseObject.put("tweet", tweet);
+        parseObject.put("user", ParseUser.getCurrentUser().getUsername());
+        final ProgressDialog dialog = new ProgressDialog(context);
+        dialog.setMessage("Sending Tweet");
+        dialog.show();
+        parseObject.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                dialog.dismiss();
+                if (e != null) return;
+                Toast.makeText(context,
+                        ParseUser.getCurrentUser().getUsername() + "'s Tweet (" + tweet + ") is saved!!!",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
