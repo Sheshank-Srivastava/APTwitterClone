@@ -3,7 +3,6 @@ package com.monnfamily.aptwitterclone.activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -41,9 +40,14 @@ public class SocialMediaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_social_media);
 
         mUserList = new ArrayList<>();
+/**
+ * below Condition
+ */
 
-        AppManager.get().setmFanOf(ParseUser.getCurrentUser().<String>getList("fanOf"));
-        Log.i("FanList",AppManager.get().getmFanOf()+"");
+        AppManager.get().setmFanOf(ParseUser.getCurrentUser().<String>getList("fanOf") == null
+                                            ? new ArrayList<String>()
+                                            : ParseUser.getCurrentUser().<String>getList("fanOf"));
+
         parseQuery = ParseUser.getQuery();
         parseQuery.whereNotEqualTo("username", ParseUser.getCurrentUser().getUsername());
         parseQuery.findInBackground(new FindCallback<ParseUser>() {
@@ -63,14 +67,14 @@ public class SocialMediaActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView_UserList);
         adapter = new UserListAdapter(SocialMediaActivity.this, mUserList, new UserListAdapter.ClickListener() {
             @Override
-            public void onClickItem(View v,int pos) {
+            public void onClickItem(View v, int pos) {
                 //TODO click event
                 CheckBox checkBox = v.findViewById(R.id.check_follow);
                 checkBox.setChecked(!checkBox.isChecked());
-                String mCheckMessage = checkBox.isChecked()?
-                        Utilities.get().follow(mUserList.get(pos),SocialMediaActivity.this) :
-                        Utilities.get().unFollow(mUserList.get(pos),SocialMediaActivity.this);
-                Toast.makeText(SocialMediaActivity.this, mCheckMessage+mUserList.get(pos), Toast.LENGTH_SHORT).show();
+                String mCheckMessage = checkBox.isChecked() ?
+                        Utilities.get().follow(mUserList.get(pos), SocialMediaActivity.this) :
+                        Utilities.get().unFollow(mUserList.get(pos), SocialMediaActivity.this);
+                Toast.makeText(SocialMediaActivity.this, mCheckMessage + mUserList.get(pos), Toast.LENGTH_SHORT).show();
             }
         });
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
