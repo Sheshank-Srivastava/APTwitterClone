@@ -40,13 +40,12 @@ public class SocialMediaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_social_media);
 
         mUserList = new ArrayList<>();
-/**
- * below Condition
- */
-
+        /**
+         * below Condition
+         */
         AppManager.get().setmFanOf(ParseUser.getCurrentUser().<String>getList("fanOf") == null
-                                            ? new ArrayList<String>()
-                                            : ParseUser.getCurrentUser().<String>getList("fanOf"));
+                ? new ArrayList<String>()
+                : ParseUser.getCurrentUser().<String>getList("fanOf"));
 
         parseQuery = ParseUser.getQuery();
         parseQuery.whereNotEqualTo("username", ParseUser.getCurrentUser().getUsername());
@@ -105,6 +104,9 @@ public class SocialMediaActivity extends AppCompatActivity {
                         finish();
                     }
                 });
+                return true;
+            case R.id.menu_tweet:
+                startActivity(new Intent(this,MyTweets.class));
                 return true;
         }
         return super.onOptionsItemSelected(item);
