@@ -23,5 +23,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/recyclerView_UserList"
-        tools:srcCompat="@tools:sample/avatars[7]" />
+        android:src="@drawable/bgimage"
+        android:clickable="false"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

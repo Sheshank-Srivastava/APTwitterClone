@@ -2,7 +2,6 @@ package com.monnfamily.aptwitterclone.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -41,17 +40,15 @@ public class SocialMediaActivity extends AppCompatActivity {
         parseQuery.findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> objects, ParseException e) {
-                if (e != null && objects.size() <= 0) return;
+                if (e != null && objects == null) return;
                 for (ParseUser object : objects) {
                     mUserList.add(object.getUsername());
 
                 }
                 loadRecycler();
+                Toast.makeText(SocialMediaActivity.this, "Data is loadeded", Toast.LENGTH_SHORT).show();
             }
         });
-        Log.i("ListSize", mUserList.size() + "");
-        Toast.makeText(this, mUserList.toString() + "", Toast.LENGTH_SHORT).show();
-
 
     }
 
