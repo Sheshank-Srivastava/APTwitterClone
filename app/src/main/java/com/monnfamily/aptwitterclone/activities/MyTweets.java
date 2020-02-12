@@ -13,16 +13,20 @@ import com.monnfamily.aptwitterclone.Utilities.Utilities;
 
 public class MyTweets extends AppCompatActivity implements View.OnClickListener {
     EditText et_yourTweet;
-    Button btn_sendTweet;
+    Button btn_sendTweet,btn_ViewTweet;
 
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_tweets);
+
         et_yourTweet = findViewById(R.id.et_yourTweet);
         btn_sendTweet = findViewById(R.id.btn_sendTweet);
+        btn_ViewTweet = findViewById(R.id.btn_ViewTweet);
+
         btn_sendTweet.setOnClickListener(this);
+        btn_ViewTweet.setOnClickListener(this);
     }
 
     @Override
@@ -36,6 +40,9 @@ public class MyTweets extends AppCompatActivity implements View.OnClickListener 
                 }
                 Utilities.get().sendTweet(tweet,MyTweets.this);
                 et_yourTweet.setText("");
+                break;
+            case R.id.btn_ViewTweet:
+
                 break;
         }
     }
