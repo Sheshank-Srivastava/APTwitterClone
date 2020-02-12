@@ -11,4 +11,6 @@
     <string name="signup">SignUp</string>
     <string name="logout">logout</string>
     <string name="temp_username">test1</string>
+    <string name="tweet_hint">What\'s your today thought?</string>
+    <string name="send_tweet">Send Tweet</string>
 </resources>
