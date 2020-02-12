@@ -1,5 +1,6 @@
 package com.monnfamily.aptwitterclone.Utilities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -47,10 +48,19 @@ public class Utilities {
         return "Unfollowed ";
     }
 
+    /**
+     *  The Parse user with it's current data set will be uploaded to the server
+     */
     private void savBackToBack4App() {
+        final ProgressDialog dialog = new ProgressDialog(context);
+        dialog.setMessage("Saving...");
+        dialog.setCancelable(false);
+        dialog.show();
+
         ParseUser.getCurrentUser().saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
+                dialog.dismiss();
                 if (e != null) return;
                 Toast.makeText(context, "New Content Saved", Toast.LENGTH_SHORT).show();
             }

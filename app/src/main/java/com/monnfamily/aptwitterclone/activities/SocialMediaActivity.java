@@ -3,6 +3,7 @@ package com.monnfamily.aptwitterclone.activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.monnfamily.aptwitterclone.R;
+import com.monnfamily.aptwitterclone.Utilities.AppManager;
 import com.monnfamily.aptwitterclone.Utilities.Utilities;
 import com.monnfamily.aptwitterclone.adapter.UserListAdapter;
 import com.parse.FindCallback;
@@ -39,6 +41,9 @@ public class SocialMediaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_social_media);
 
         mUserList = new ArrayList<>();
+
+        AppManager.get().setmFanOf(ParseUser.getCurrentUser().<String>getList("fanOf"));
+        Log.i("FanList",AppManager.get().getmFanOf()+"");
         parseQuery = ParseUser.getQuery();
         parseQuery.whereNotEqualTo("username", ParseUser.getCurrentUser().getUsername());
         parseQuery.findInBackground(new FindCallback<ParseUser>() {
@@ -47,8 +52,8 @@ public class SocialMediaActivity extends AppCompatActivity {
                 if (e != null && objects.size() <= 0) return;
                 for (ParseUser object : objects) {
                     mUserList.add(object.getUsername());
-
                 }
+                AppManager.get().setmUserList(mUserList);
                 loadRecycler();
             }
         });
