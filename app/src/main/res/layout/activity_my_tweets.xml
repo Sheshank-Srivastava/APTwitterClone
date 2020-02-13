@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MyTweets">
+    tools:context=".activities.MyTweets"
+    android:background="#F9A825">
 
     <EditText
         android:id="@+id/et_yourTweet"
@@ -44,7 +45,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_ViewTweet" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_ViewTweet"
+        android:background="@android:color/transparent" />
 
     <Button
         android:id="@+id/btn_ViewTweet"

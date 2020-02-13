@@ -6,7 +6,6 @@ public class AppManager {
 
     private List<String> mUserList ;
     private List<String> mFanOf ;
-
     private static AppManager mInstance = null;
 
     public static AppManager get() {
@@ -27,6 +26,8 @@ public class AppManager {
         return mFanOf;
     }
 
+
+
     /**
      * From here setter Function's start
      */
@@ -37,5 +38,14 @@ public class AppManager {
 
     public void setmFanOf(List<String> mFanOf) {
         this.mFanOf = mFanOf;
+    }
+
+
+    public static AppManager getmInstance() {
+        return mInstance;
+    }
+
+    public static void setmInstance(AppManager mInstance) {
+        AppManager.mInstance = mInstance;
     }
 }

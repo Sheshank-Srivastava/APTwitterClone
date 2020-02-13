@@ -14,4 +14,6 @@
     <string name="tweet_hint">What\'s your today thought?</string>
     <string name="send_tweet">Send Tweet</string>
     <string name="view_user_tweet">View Other\'s User Tweet</string>
+    <string name="your_tweet">Your Tweet</string>
+    <string name="user_name">User Name</string>
 </resources>

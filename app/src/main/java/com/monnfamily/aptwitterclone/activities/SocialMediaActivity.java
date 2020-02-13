@@ -103,7 +103,7 @@ public class SocialMediaActivity extends AppCompatActivity {
                     public void done(ParseException e) {
                         progressDialog.dismiss();
                         startActivity(new Intent(SocialMediaActivity.this, LogInActivity.class));
-                        finish();
+                     finish();
                     }
                 });
                 return true;
